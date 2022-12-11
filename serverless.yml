@@ -8,10 +8,10 @@ plugins:
 
 custom:
   dynamodb:
-    stages: 
+    stages:
       - local-dev
     start:
-      port: 8000
+      port: 3001
       inMemory: true
       heapInitial: 200m
       heapMax: 1g
@@ -22,8 +22,8 @@ custom:
 provider:
   name: aws
   runtime: nodejs16.x
-  environment: 
-    SERVERLESS_WORKSHOP_TABLE: ${self:service}-serverless-workshop-${sls:stage}
+  environment:
+    SERVERLESS_WORKSHOP_TABLE: serverless-workshop-${sls:stage}
   iam:
     role:
       statements:
@@ -34,7 +34,7 @@ provider:
             - 'dynamodb:Scan*'
             - 'dynamodb:UpdateItem'
             - 'dynamodb:DeleteItem'
-          Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:service}-serverless-workshop-${sls:stage}
+          Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/serverless-workshop-${sls:stage}
 
 functions:
   create:
@@ -62,4 +62,4 @@ resources:
         KeySchema:
           - AttributeName: linkId
             KeyType: HASH
-        TableName: ${self:service}-serverless-workshop-${sls:stage}
+        TableName: serverless-workshop-${sls:stage}

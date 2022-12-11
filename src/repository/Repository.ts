@@ -9,7 +9,7 @@ const tableName: string = process.env.SERVERLESS_WORKSHOP_TABLE || 'serverless-w
 export const initializeDB = () => {
     if (!_instance) {
         _instance = process.env.IS_OFFLINE ? new DynamoDB.DocumentClient({
-            endpoint: 'http://localhost:8000'
+            endpoint: 'http://localhost:3001'
         }) : new DynamoDB.DocumentClient();
     }
 }
@@ -21,9 +21,10 @@ export const saveUrl = async (record: URL): Promise<PromiseResult<PutItemOutput,
             linkId: record.linkId,
             url: record.url,
             clicks: record.clicks
-        } 
+        }
     };
-    return _instance.put(params).promise();
+
+	return _instance.put(params).promise();
 }
 
 export const getUrl = async (linkId: string): Promise<URL | null> => {
@@ -56,7 +57,7 @@ export const updateClicks = async (linkId: string, clicks: Number): Promise<Prom
         },
         UpdateExpression: 'set clicks = :clicks',
         ExpressionAttributeValues: {
-            ':clicks': clicks 
+            ':clicks': clicks
         }
     }
     return _instance.update(params).promise();

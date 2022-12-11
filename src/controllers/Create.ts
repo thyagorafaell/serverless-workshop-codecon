@@ -28,7 +28,7 @@ export const handler = async (event: APIGatewayProxyEvent, context: Context): Pr
         clicks: 0
     }
 
-    await saveUrl(record);
+	await saveUrl(record);
 
     return {
         statusCode: 200,

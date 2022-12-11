@@ -4,7 +4,9 @@
   "description": "Projeto de exemplo para Workshop da Codecon",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "startdb": "serverless dynamodb start -s local-dev",
+    "start": "serverless offline -s local-dev",
+    "deploy": "serverless deploy"
   },
   "author": "Flávio Omar Losada",
   "license": "ISC",
