@@ -21,7 +21,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   environment:
     SERVERLESS_WORKSHOP_TABLE: serverless-workshop-${sls:stage}
   iam:
